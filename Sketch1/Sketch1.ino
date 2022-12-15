@@ -50,6 +50,7 @@ int Calc_Interval()
 //========================================================
 void TimerHandlerX(void)
 {
+
 	Test1(true);
 	intervalCounter--;
 	if (intervalCounter <= 0) {
