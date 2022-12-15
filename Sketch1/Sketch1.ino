@@ -22,15 +22,6 @@ void setup()
 	Velocity = 400;
 	SetGroup(2);
 
-	/* MaxVelocity = 10000;
-	 AccMinVelocity = 2000;
-	 StartVelocity = 500;
-	 CurrentVelocity = 0;
-	 DecPoint = MaxVelocity;
-	 MoveState = 0;
-	 Velocity = 5000;
-	 AccStepX = 10;*/
-
 	InterruptTimerX.attachInterruptInterval(50, TimerHandlerX);
 }
 
@@ -53,7 +44,7 @@ void TimerHandlerX(void)
 	Test1(true);
 	intervalCounter--;
 	if (intervalCounter <= 0) {
-		Test2(true);//00000000000000000000
+		Test2(true);
 		intervalCounter = Interval/20;
 		Calc_Interval();
 		if (enableX) RunX();
