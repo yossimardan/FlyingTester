@@ -2,7 +2,7 @@
 #include "Functions.h"
 
 
-//=============================================
+//=============================================--
 //=====       MoveToSetting    ================
 //=============================================
 void MoveToSetting(long target,long position,int directionPin)
