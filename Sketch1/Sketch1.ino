@@ -50,11 +50,10 @@ int Calc_Interval()
 //========================================================
 void TimerHandlerX(void)
 {
-	//1233eqwweewqewqw8798
 	Test1(true);
 	intervalCounter--;
 	if (intervalCounter <= 0) {
-		Test2(true);
+		Test2(true);//00000000000000000000
 		intervalCounter = Interval/20;
 		Calc_Interval();
 		if (enableX) RunX();
