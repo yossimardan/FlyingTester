@@ -33,7 +33,7 @@ void HandleCommand(String cmd, long prm1, int prm2, int prm3)
 	}
 
 	//========================================================
-	if (cmd == "rp")
+	if (cmd == "st")
 	{
 		SendRportMessage();
 	}

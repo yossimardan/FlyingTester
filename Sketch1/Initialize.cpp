@@ -31,19 +31,10 @@ void Initialize()
   
   Serial.begin(38400);
   Serial.setTimeout(10);
-  
-  xAxis.setPinsInverted(true);
-  
   digitalWrite(SELECT_0,false);
-  //digitalWrite(SELECT_1,false);
-  //digitalWrite(SELECT_2,true);
- 
-  //xAxis.moveTo(10000);
- // xAxis.setMaxSpeed(Vx);
- // yAxis.setMaxSpeed(Vy);
- // zAxis.setMaxSpeed(Vz);
- // xAxis.setAcceleration(Ax);
- // yAxis.setAcceleration(Ay);
- // zAxis.setAcceleration(Az);
+
+  CreepInterval = 2000;
+  ApproachVelocity = 20;
+
   SetGroup(3);
 }

@@ -114,16 +114,16 @@ void SendRportMessage()
 	Serial.print("=======================================================\r\n");
 	Serial.print("Position\tx= " + String(positionX) + "\t\tY= " + String(positionY) + "\t\tZ= " + String(positionY) + "\r\n");
 	Serial.print("Target\tx= " + String(targetX) + "\t\tY= " + String(targetX) + "\t\tZ= " + String(targetX) + "\r\n");
-
 	Serial.print("AccMinVelocity\t= " + String(AccMinVelocity)+"\r\n");
-	Serial.print("MaxVelocity\t= " + String(MaxVelocity) + "\r\n");
 //	Serial.print("StartVelocity\t= " + String(StartVelocity) + "\r\n");
 	Serial.print("CurrentVelocity\t= " + String(CurrentVelocity) + "\r\n");
 	Serial.print("Velocity\t= " + String(Velocity) + "\r\n");
 	Serial.print("DecPoint\t= " + String(DecPoint) + "\r\n");
 	Serial.print("Timer_Interval\t= " + String(Interval) + "\r\n");
+	Serial.println("MaxVelocity\t= " + String(MaxVelocity));
+	Serial.println("ApproachVelocity= " + String(ApproachVelocity));
+	Serial.println("CreepInterval= " + String(CreepInterval));
 
-	Serial.print("ApproachVelocity= " + String(ApproachVelocity) + " : " + "CreepVelocity= " + String(CreepVelocity) + "\r\n");
 	Serial.print("EnableSafety= " + String(EnableSafety) + "\r\n");
 	Serial.print("xBoundary0= " + String(xBoundary0) + " : " + "xBoundary1= " + String(xBoundary1) + "\r\n");
 }
@@ -133,12 +133,18 @@ void SendRportMessage()
 //========================================================
 void SendHelpMessage()
 {
-	Serial.print("PcbTester Version 1.20 - Gusti Base"); Serial.print("\r\n");
-	Serial.print("========================================================\r\n");
-	Serial.print("ex - Exit terminal mode\t\t");	Serial.print("mr - Master Reset\r\n");
-	Serial.print("rp - Get report\t\t\t");			Serial.print("mr - Master Reset\r\n");
-	Serial.print("rn - Move Relative\t\t");			Serial.print("mn - MoveTo n Axis \r\n");
-	Serial.print("========================================================\r\n");
-	Serial.print("Execute [ex] command to exit terminal mode.\r\n");
+	Serial.println("PcbTester Version 1.20 - Gusti Base"); 
+	Serial.println("========================================================");
+	Serial.println("mr - Master Reset");
+	Serial.println("ex - Exit terminal mode");
+	Serial.println("rp - Get report");
+	Serial.println("rn - Move Relative");	
+	Serial.println("ci - Set Homing Creep_Interval, when velocity = 0.");
+	Serial.println("hv - Set Homing Approatch velocity");
+	Serial.println("sv - Set velocity.");
+	Serial.println("st - Print machine state (Parameters).");
+	Serial.println("========================================================");
+	Serial.println("?  - Terminal mode - Help Page");
+	Serial.println("ex - Exit terminal mode");
 }
 
