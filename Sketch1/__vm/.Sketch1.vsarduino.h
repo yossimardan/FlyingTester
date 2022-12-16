@@ -442,7 +442,6 @@ int printf(const char *, ...) {
 }
 #endif
 
-#include "Sketch1.ino"
-#include "Initialize.ino"
+#include "PcbTester.ino"
 #endif
 #endif

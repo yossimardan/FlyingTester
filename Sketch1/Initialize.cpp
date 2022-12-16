@@ -1,5 +1,6 @@
-#include <AccelStepper.h>
-#include <SAMDTimerInterrupt.h>
+#include "Externals.cpp"
+#include "Functions.h"
+
 void Initialize()
 {
   pinMode(Pulse_Pin_X, OUTPUT);

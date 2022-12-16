@@ -72,16 +72,24 @@ void HandleCommand(String cmd, long prm1, int prm2, int prm3)
 		zAxis.setAcceleration(Vz * 100);
 	}
 	//========================================================
-	if (cmd == "vp")
+	//===========             VELOCITY      ==================
+	//========================================================
+	if (cmd == "hv")
 	{
 		if (prm1 != Null)  ApproachVelocity = prm1;
 		if (isTerminal) Serial.print("va= " + String(ApproachVelocity) + "\r\n");
 	}
 	//========================================================
-	if (cmd == "vc")
+	if (cmd == "cv")
 	{
 		if (prm1 != Null)  CreepVelocity = prm1;
-		if (isTerminal) Serial.print("vc= " + String(CreepVelocity) + "\r\n");
+		if (isTerminal) Serial.print("CreepVelocity = " + String(CreepVelocity) + "\r\n");
+	}
+	//========================================================
+	if (cmd == "ci")
+	{
+		if (prm1 != Null)  CreepInterval = prm1;
+		if (isTerminal) Serial.print("CreepInterval = " + String(CreepInterval) + "\r\n");
 	}
 	//========================================================
 	if (cmd == "sv")

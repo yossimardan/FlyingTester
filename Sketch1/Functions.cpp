@@ -1,5 +1,5 @@
 #include "Functions.h"
-#include "Extern_Variables.cpp"
+#include "Externals.cpp"
 
 long voltBuffer[1024];
 int avgSamples = 256;

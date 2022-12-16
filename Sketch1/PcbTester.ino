@@ -3,7 +3,6 @@
 #include "Functions.h"
 #include "Variables.h"
 SAMDTimer InterruptTimerX(TIMER_TC3);
-//SAMDTimer InterruptTimerY(TIMER_TCC);
 
 int  accTarget;
 int  accStart;
@@ -27,12 +26,11 @@ void setup()
 
 int Calc_Interval()
 {
-	CreepVelocity = 2000;
 	CurrentVelocity = CurrentVelocity + AccStep * 1;				// Accelerate
 	CurrentVelocity = min(CurrentVelocity, Velocity);				//	CurrentVelocity < Velocity
 	CurrentVelocity = max(min(CurrentVelocity, MaxVelocity), 0);	//  0 < CurrentVelocity < MaxVelocity
 	Interval = StartVelocity - CurrentVelocity;
-	if (Velocity < 10) Interval = CreepVelocity;
+	if (Velocity < 10) Interval = CreepInterval;
 	//Interval = CreepVelocity;
 }
 

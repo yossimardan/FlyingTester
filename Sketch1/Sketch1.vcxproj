@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C5F80730-F44F-4478-BDAE-6634EFC2CA88}</ProjectGuid>
     <RootNamespace>Sketch1</RootNamespace>
-    <ProjectName>Sketch1</ProjectName>
+    <ProjectName>PcbTester</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -110,8 +110,8 @@
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Initialize.ino" />
-    <None Include="Sketch1.ino" />
+    <None Include="Initialize.cpp" />
+    <None Include="PcbTester.ino" />
     <None Include="src\arduino folders read me.txt">
     </None>
   </ItemGroup>

@@ -187,6 +187,7 @@ bool  isHoming = false;
 bool  isHomeDone = false;
 int   ApproachVelocity = 100;
 int   CreepVelocity = 2;
+int   CreepInterval = 2000;
 int   HomingOffsetX = 6400;
 int   HomingOffsetY = 10600;
 int   HomingOffsetZ = -8000;

@@ -23,6 +23,8 @@ void HandleHopScript();
 void HandleHomingScript();
 void HandleHomingScript2();
 void HandleHomingScriptTest();
+void Initialize();
+
 void StopAll();
 void SendRportMessage();
 void SendHelpMessage();

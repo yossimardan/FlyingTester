@@ -29,6 +29,7 @@ extern int   V003;
 extern int  DecPoint;
 extern int  Velocity;
 extern int  CreepVelocity;
+extern int  CreepInterval;
 extern int 	StartVelocity;
 extern long   positionX;
 extern long   targetX;
