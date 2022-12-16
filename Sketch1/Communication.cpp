@@ -145,6 +145,6 @@ void SendHelpMessage()
 	Serial.println("st - Print machine state (Parameters).");
 	Serial.println("========================================================");
 	Serial.println("?  - Terminal mode - Help Page");
-	Serial.println("ex - Exit terminal mode");
+	Serial.println("ex - Exit terminal mode ");
 }
 
