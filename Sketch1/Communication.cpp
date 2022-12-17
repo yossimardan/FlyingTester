@@ -4,37 +4,6 @@
 int msgCounter = 0;
 void HandleCommand(String cmd, long prm1, int prm2, int prm3);
 
-//========================================================
-//=====    Send Status Message    ========================
-//========================================================
-void SendStatusMessage()
-{
-	if (isTerminal) return;
-
-	Serial.println("<" + String(msgCounter++) +
-		":" + String(IsMoving) + String(isHopping) + String(isHoming) + String(isHomeDone) + String(isSafetyError) + String(Is_Ems_On()) + String(SwLimitEnable) +
-		":" + String(positionX) +
-		":" + String(positionY) +
-		":" + String(positionZ) +
-		":" + String(voltageF) +
-		":" +
-
-//		":v1 " + String(V001) +
-//		":v2 " + String(V002) +
-//		":v3 " + String(V003) +
-
-		"\tSv:" + String(StartVelocity) +
-		"\tcv:" + String(CurrentVelocity) +
-		"\tv:" + String(Velocity) +
-		"\tmv" + String(MaxVelocity) +
-//		"\tam:" + String(AccMinVelocity) +
-		//		":it" + String(Interval) +
-//		"ad" + String(AccDirection) +
-//		"\tcr:" + String(CreepVelocity) +
-		"\tit:" + String(Interval) +
-
-		">" );
-}
 
 //========================================================
 //=====     ParseParams            =======================
@@ -126,6 +95,37 @@ void SendRportMessage()
 
 	Serial.print("EnableSafety= " + String(EnableSafety) + "\r\n");
 	Serial.print("xBoundary0= " + String(xBoundary0) + " : " + "xBoundary1= " + String(xBoundary1) + "\r\n");
+}
+//========================================================
+//=====    Send Status Message    ========================
+//========================================================
+void SendStatusMessage()
+{
+	if (isTerminal) return;
+
+	Serial.println("<" + String(msgCounter++) +
+		":" + String(IsMoving) + String(isHopping) + String(isHoming) + String(isHomeDone) + String(isSafetyError) + String(Is_Ems_On()) + String(SwLimitEnable) +
+		":" + String(positionX) +
+		":" + String(positionY) +
+		":" + String(positionZ) +
+		":" + String(voltageF) +
+		":" +
+
+		//		":v1 " + String(V001) +
+		//		":v2 " + String(V002) +
+		//		":v3 " + String(V003) +
+
+		"\tsv:" + String(StartVelocity) +
+		"\tcv:" + String(CurrentVelocity) +
+		"\tv:" + String(Velocity) +
+		"\tmv" + String(MaxVelocity) +
+		//		"\tam:" + String(AccMinVelocity) +
+				//		":it" + String(Interval) +
+		//		"ad" + String(AccDirection) +
+		//		"\tcr:" + String(CreepVelocity) +
+		"\tit:" + String(Interval) +
+
+		">");
 }
 
 //========================================================
