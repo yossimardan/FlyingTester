@@ -3,6 +3,20 @@
 #include <Arduino.h>
 extern long param1,param2,param3;
 
+//========================================================
+//=====     Tmc429          ==============================
+//========================================================
+
+void Tmc429_Init();
+void Tmc429_SetTarget(int value);
+int Tmc429_GetTarget();
+void tmc429_SetVelocityMode();
+bool  tmc429_IsConnected();
+int tmc429_GetVersion();
+int tmc429_GetPosition();
+//========================================================
+//=====     General         ==============================
+//========================================================
 void Led_Toggle();
 void Test1(bool value);
 void Test1_Toggle();

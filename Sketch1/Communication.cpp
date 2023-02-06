@@ -108,9 +108,10 @@ void SendStatusMessage()
 	if (isTerminal) return;
 
 	Serial.println("<" + String(msgCounter++) + "> "+
-		"TR:" + String(Target_State) +
-		" PS:" + String(Target) +
-
+        " ST:" + String(Target) +
+        " PS:" + String(Position) +
+        " TR:" + String(Target_State) +
+        " CN:" + String(IsConnected) +
 		">");
 }
 

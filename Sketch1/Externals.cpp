@@ -7,12 +7,11 @@ extern int TEST2;
 //========================================================
 //=====   TM429             ==============================
 //========================================================
-extern int Target_State;
-extern int Target;
-
+extern int  Target_State;
+extern int  Target;
+extern int  Position;
+extern bool IsConnected;
 //============================================================
-
-
 
 
 extern float voltageF;
