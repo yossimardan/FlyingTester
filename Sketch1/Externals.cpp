@@ -1,6 +1,19 @@
-//
-//extern long param1,param2,param3;
-#include <AccelStepper.h>
+//========================================================
+//=====   GPIO  MAPPING     ==============================
+//========================================================
+extern int TEST1;
+extern int TEST2;
+
+//========================================================
+//=====   TM429             ==============================
+//========================================================
+extern int Target_State;
+extern int Target;
+
+//============================================================
+
+
+
 
 extern float voltageF;
 extern float VoltageFactor;
@@ -66,27 +79,6 @@ extern int    maxVz;
 
 
 
-extern int In2;
-extern int In3;
-extern int DacOut;
-extern int TEST1_PIN;
-extern int TEST2_PIN;
-extern int Pulse_Pin_X;
-extern int Dir_Pin_X;
-extern int Pulse_Pin_Y;
-extern int Dir_Pin_Y;
-extern int Pulse_Pin_Z;
-extern int Dir_Pin_Z;
-extern int ENA_X_PIN;
-extern int ENA_Y_PIN;
-extern int OVER;
-extern int SELECT_0;
-extern  int SENSOR_X_PIN;
-extern  int SENSOR_Y_PIN;
-extern  int SENSOR_Z_PIN;
-extern  int SENSOR_EMS_PIN;
-extern  int In0;
-extern  int In1;
 
 extern int ApproachVelocity;
 extern int CreepVelocity;
@@ -97,12 +89,8 @@ extern int Numerator_C;
 
 extern long voltage;
 
-extern  int ANALOG_IN_PIN;
 
 //extern AccelStepper xAxis(1, Pulse_Pin_X, Dir_Pin_X);
-extern AccelStepper xAxis;
-extern AccelStepper yAxis;
-extern AccelStepper zAxis;
 
 extern int stepsToMilimetersDivider;
 
@@ -151,8 +139,6 @@ extern int hopHeightCard;
 extern int hopHeightCircle;
 
 
-extern String RxBuffer;
-extern String cmd;
 extern long param1, param2, param3, param4;
 extern int currentStatus;
 extern int hopState;

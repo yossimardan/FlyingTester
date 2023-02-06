@@ -65,7 +65,6 @@ void MoveToSetting(long target,long position,int directionPin)
 void MoveToX(long value)
 {
 	targetX = value;
-	MoveToSetting(targetX, positionX, Dir_Pin_X);
 	enableX = true;
 }
 
@@ -75,7 +74,6 @@ void MoveToX(long value)
 void MoveToY(long value)
 {
 	targetY = value;
-	MoveToSetting(targetY, positionY, Dir_Pin_Y);
 	enableY = true;
 }
 //=============================================
@@ -84,7 +82,6 @@ void MoveToY(long value)
 void MoveToZ(long value)
 {
 	targetZ = value;
-	MoveToSetting(targetZ, positionZ, Dir_Pin_Z);
 	enableZ = true;
 }
 //=============================================
@@ -137,11 +134,6 @@ void RunX()
 	{
 		if (positionX != targetX)
 		{
-			digitalWrite(Pulse_Pin_X, true);
-			delayMicroseconds(1);
-			digitalWrite(Pulse_Pin_X, false);
-			if (Direction) positionX++; else positionX--;
-			if (abs(targetX - positionX) < DecPoint) AccStep = -1;
 		}
 		else enableX = false;
 	}
@@ -172,15 +164,6 @@ void RunY()
 
 	if (enableY)
 	{
-		if (positionY != targetY)
-		{
-			digitalWrite(Pulse_Pin_Y, true);
-			delayMicroseconds(1);
-			digitalWrite(Pulse_Pin_Y, false);
-			if (Direction) positionY++; else positionY--;
-			if (abs(targetY - positionY) < DecPoint) AccStep = -1;
-		}
-		else enableY = false;
 	}
 }
 //=============================================
@@ -203,11 +186,6 @@ void RunZ()
 	{
 		if (positionZ != targetZ)
 		{
-			digitalWrite(Pulse_Pin_Z, true);
-			delayMicroseconds(1);
-			digitalWrite(Pulse_Pin_Z, false);
-			if (Direction) positionZ++; else positionZ--;
-			if (abs(targetZ - positionZ) < DecPoint) AccStep = -1;
 		}
 		else enableZ = false;
 	}

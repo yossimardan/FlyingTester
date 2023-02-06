@@ -10,9 +10,6 @@ int avgSamples = 256;
 //===============================
 void StopAll()
 {
-	xAxis.stop();
-	yAxis.stop();
-	zAxis.stop();
 	hopState = 0;
 	isHopping = false;
 	homingState = 0;
@@ -31,13 +28,6 @@ void StopAll()
 //===============================
 void ReadVoltage()
 {
-	// VoltageFactor= 20.0;
-	long sum = 0;
-	long v = analogRead(ANALOG_IN_PIN);
-	vIndex = (vIndex + 1) % avgSamples;
-	voltBuffer[vIndex] = v;
-	for (int i = 0; i < avgSamples; i++) sum += voltBuffer[i];
-	voltageF = (float)sum / avgSamples * VoltageFactor / 1000000;
 }
 
 //===============================
@@ -120,7 +110,6 @@ int GetGroup()
 
 bool IsInMovement()
 {
-	return xAxis.isRunning() || yAxis.isRunning() || zAxis.isRunning();
 }
 
 

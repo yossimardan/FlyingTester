@@ -2,7 +2,10 @@
 #include "Functions.h"
 
 int msgCounter = 0;
-void HandleCommand(String cmd, long prm1, int prm2, int prm3);
+String RxBuffer;
+//String RxBuffer2;
+
+//void HandleCommand(String cmd, long prm1, int prm2, int prm3);
 
 
 //========================================================
@@ -52,6 +55,7 @@ void ParseParams(String params)
 void GetSerialMsg()
 {
 
+	String cmd;
 	String rxString = Serial.readString();
 	RxBuffer = RxBuffer + rxString;
 
@@ -59,7 +63,7 @@ void GetSerialMsg()
 	if (index != -1) {
 		String commandLine = RxBuffer.substring(0, index);
 		RxBuffer = "";
-
+		Test2_Toggle();
 		if (commandLine.substring(0, 1) == "?")
 		{
 			HandleCommand("?", param1, param2, param3);
@@ -83,8 +87,8 @@ void SendRportMessage()
 	Serial.print("=======================================================\r\n");
 	Serial.print("Position\tx= " + String(positionX) + "\t\tY= " + String(positionY) + "\t\tZ= " + String(positionY) + "\r\n");
 	Serial.print("Target\tx= " + String(targetX) + "\t\tY= " + String(targetX) + "\t\tZ= " + String(targetX) + "\r\n");
-	Serial.print("AccMinVelocity\t= " + String(AccMinVelocity)+"\r\n");
-//	Serial.print("StartVelocity\t= " + String(StartVelocity) + "\r\n");
+	Serial.print("AccMinVelocity\t= " + String(AccMinVelocity) + "\r\n");
+	//	Serial.print("StartVelocity\t= " + String(StartVelocity) + "\r\n");
 	Serial.print("CurrentVelocity\t= " + String(CurrentVelocity) + "\r\n");
 	Serial.print("Velocity\t= " + String(Velocity) + "\r\n");
 	Serial.print("DecPoint\t= " + String(DecPoint) + "\r\n");
@@ -103,27 +107,9 @@ void SendStatusMessage()
 {
 	if (isTerminal) return;
 
-	Serial.println("<" + String(msgCounter++) +
-		":" + String(IsMoving) + String(isHopping) + String(isHoming) + String(isHomeDone) + String(isSafetyError) + String(Is_Ems_On()) + String(SwLimitEnable) +
-		":" + String(positionX) +
-		":" + String(positionY) +
-		":" + String(positionZ) +
-		":" + String(voltageF) +
-		":" +
-
-		//		":v1 " + String(V001) +
-		//		":v2 " + String(V002) +
-		//		":v3 " + String(V003) +
-
-		"\tsv:" + String(StartVelocity) +
-		"\tcv:" + String(CurrentVelocity) +
-		"\tv:" + String(Velocity) +
-		"\tmv" + String(MaxVelocity) +
-		//		"\tam:" + String(AccMinVelocity) +
-				//		":it" + String(Interval) +
-		//		"ad" + String(AccDirection) +
-		//		"\tcr:" + String(CreepVelocity) +
-		"\tit:" + String(Interval) +
+	Serial.println("<" + String(msgCounter++) + "> "+
+		"TR:" + String(Target_State) +
+		" PS:" + String(Target) +
 
 		">");
 }
@@ -133,12 +119,12 @@ void SendStatusMessage()
 //========================================================
 void SendHelpMessage()
 {
-	Serial.println("PcbTester Version 1.20 - Gusti Base"); 
+	Serial.println("PcbTester Version 1.20 - Gusti Base");
 	Serial.println("========================================================");
 	Serial.println("mr - Master Reset");
 	Serial.println("ex - Exit terminal mode");
 	Serial.println("rp - Get report");
-	Serial.println("rn - Move Relative");	
+	Serial.println("rn - Move Relative");
 	Serial.println("ci - Set Homing Creep_Interval, when velocity = 0.");
 	Serial.println("hv - Set Homing Approatch velocity");
 	Serial.println("sv - Set velocity.");

@@ -3,49 +3,40 @@
 
 void  Led_Toggle()
 {
-	digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+	//	digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
 }
 //============================================================
 bool  IsOverVoltageOn()
 {
-	return !digitalRead(OVER);
 }
 
 //============================================================
 void  Relay_On()
 {
-	digitalWrite(SELECT_0, true);
 }
 void   Relay_Off()
 {
-	digitalWrite(SELECT_0, false);
 }
 
 bool  GetRelayState()
 {
-	return digitalRead(SELECT_0);
 }
 
 //============================================================
 bool  Is_SensorX_On()
 {
-	return !digitalRead(SENSOR_X_PIN);
 }
 //============================================================
 bool  Is_SensorY_On()
 {
-	return !digitalRead(SENSOR_Y_PIN);
 }
 //============================================================
 bool  Is_SensorZ_On()
 {
-	return !digitalRead(SENSOR_Z_PIN);
 }
 //============================================================
 bool  Is_Ems_On()
 {
-	return false; // remove
-	return digitalRead(SENSOR_EMS_PIN);
 }
 //============================================================
 void SetVelocity(int value)
@@ -61,11 +52,11 @@ void SetVelocity(int value)
 //===============================
 void Test1(bool value)
 {
-	digitalWrite(TEST1_PIN, !value);
+	digitalWrite(TEST1, value);
 }
 void Test1_Toggle()
 {
-	digitalWrite(TEST1_PIN, !digitalRead(TEST1_PIN));
+	digitalWrite(TEST1, !digitalRead(TEST1));
 }
 
 //===============================
@@ -73,9 +64,9 @@ void Test1_Toggle()
 //===============================
 void Test2(bool value)
 {
-	digitalWrite(TEST2_PIN, !value);
+	digitalWrite(TEST2, value);
 }
 void Test2_Toggle()
 {
-	digitalWrite(TEST2_PIN, !digitalRead(TEST2_PIN));
+	digitalWrite(TEST2, !digitalRead(TEST2));
 }

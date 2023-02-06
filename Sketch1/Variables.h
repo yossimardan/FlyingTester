@@ -1,30 +1,51 @@
 #include <AccelStepper.h>
 
+//========================================================
+//=====   GPIO  MAPPING     ==============================
+//========================================================
+int TEST1 = 16;
+int TEST2 = 17;
+
+//========================================================
+//=====   TM429             ==============================
+//========================================================
+int Target_State;
+int Target;
+
 //============================================================
-int Pulse_Pin_X       = 10;
-int Dir_Pin_X         = 11;
-int Pulse_Pin_Y       = 8;
-int Dir_Pin_Y         = 9;
-int Pulse_Pin_Z       = 6;
-int Dir_Pin_Z         = 7;
-int ENA_X_PIN         = 12;
-//int ENA_Y_PIN       = 9;
-//int SELECT_2        = 21;
-//int SELECT_1        = 20;
-int SELECT_0          = 5;// 
-int TEST1_PIN         = 4;// 
-int TEST2_PIN         = 21;//
-int DacOut            = A0;//
-int ANALOG_IN_PIN       = A1;
-int SENSOR_X_PIN        = 0;
-int SENSOR_Y_PIN        = 1;
-int  SENSOR_Z_PIN		= 2;
-int SENSOR_EMS_PIN      = 3;
-int OVER                = 18;
-int In0                 = 16;
-int In1                 = 17;
-int In2                 = 19;
-int In3                 = 20;
+
+//String RxBuffer2;
+
+
+
+
+
+// 
+// 
+// 
+//int Pulse_Pin_X       = 10;
+//int Dir_Pin_X         = 11;
+//int Pulse_Pin_Y       = 8;
+//int Dir_Pin_Y         = 9;
+//int Pulse_Pin_Z       = 6;
+//int Dir_Pin_Z         = 7;
+//int ENA_X_PIN         = 12;
+////int ENA_Y_PIN       = 9;
+////int SELECT_2        = 21;
+////int SELECT_1        = 20;
+//int SELECT_0          = 5;// 
+//int TEST1_PIN         = 4;// 
+//int TEST2_PIN         = 21;//
+//int DacOut            = A0;//
+//int SENSOR_X_PIN        = 0;
+//int SENSOR_Y_PIN        = 1;
+//int  SENSOR_Z_PIN		= 2;
+//int SENSOR_EMS_PIN      = 3;
+//int OVER                = 18;
+//int In0                 = 16;
+//int In1                 = 17;
+//int In2                 = 19;
+//int In3                 = 20;
 //============================================================
 
 int startIndex;
@@ -106,9 +127,6 @@ long  voltage;
 float VoltageFactor=975;
  
  
-AccelStepper xAxis(1, Pulse_Pin_X, Dir_Pin_X);
-AccelStepper yAxis(1, Pulse_Pin_Y, Dir_Pin_Y);
-AccelStepper zAxis(1, Pulse_Pin_Z, Dir_Pin_Z);
 
 int stepsToMilimetersDivider = 200;
 
@@ -163,7 +181,7 @@ int hopHeightCard = 30 * stepsToMilimetersDivider; //40
 int hopHeightCircle = 20 * stepsToMilimetersDivider;
 
 
-String  RxBuffer = "";
+//String  RxBuffer = "";
 String  cmd = "";
 long    param1,param2,param3,param4;
 int     currentStatus = 0;
@@ -188,9 +206,9 @@ bool  isHomeDone = false;
 int   ApproachVelocity;
 int   CreepVelocity = 2;
 int   CreepInterval;
-int   HomingOffsetX = 6400;
-int   HomingOffsetY = 10600;
-int   HomingOffsetZ = -8000;
+int   HomingOffsetX ;
+int   HomingOffsetY ;
+int   HomingOffsetZ ;
 int   homingX = 0;
 int   homingY = 0;
 int   homingZ = 0;

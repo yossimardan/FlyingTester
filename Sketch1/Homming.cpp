@@ -3,7 +3,8 @@
 
 void HandleHomingScript2()
 {
-  switch(homingState)
+    CreepVelocity=0;
+    switch(homingState)
   {
 //==============================================================
 //========================    Z HOMING     =====================
@@ -36,8 +37,8 @@ void HandleHomingScript2()
       case 40:
         if(!Is_SensorZ_On())
         {
-            homingZ = positionZ;
-            StopXyz();
+            positionZ = 0;
+            MoveToZ(-HomingOffsetZ);
             homingState = 45;
         }
         break;
@@ -72,8 +73,8 @@ void HandleHomingScript2()
       case 80:
         if(!Is_SensorX_On())
         {
-            homingX = positionX;
-            StopXyz();
+            positionX = 0;
+            MoveToX(HomingOffsetX);
             homingState = 85;
         }
         break;
@@ -108,8 +109,8 @@ void HandleHomingScript2()
       case 120:
         if(!Is_SensorY_On())
         {
-            homingY = positionY;
-            StopXyz();
+            positionY = 0;
+            MoveToY(HomingOffsetY);
             homingState = 130;
         }
         break;
