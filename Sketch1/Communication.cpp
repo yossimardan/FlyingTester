@@ -1,6 +1,24 @@
 #include "Externals.cpp"
 #include "Functions.h"
 
+const static uint8_t ADDRESS_X_TARGET = 0b0000;
+const static uint8_t ADDRESS_X_ACTUAL = 0b0001;
+const static uint8_t ADDRESS_V_MIN = 0b0010;
+const static uint8_t ADDRESS_V_MAX = 0b0011;
+const static uint8_t ADDRESS_V_TARGET = 0b0100;
+const static uint8_t ADDRESS_V_ACTUAL = 0b0101;
+const static uint8_t ADDRESS_A_MAX = 0b0110;
+const static uint8_t ADDRESS_A_ACTUAL = 0b0111;
+const static uint8_t ADDRESS_A_THRESHOLD = 0b1000;
+const static uint8_t ADDRESS_PROP_FACTOR = 0b1001;
+const static uint8_t ADDRESS_REF_CONF_MODE = 0b1010;
+const static uint8_t ADDRESS_INTERRUPT = 0b1011;
+const static uint8_t ADDRESS_CLOCK_CONFIGURATION = 0b1100;
+const static uint8_t ADDRESS_DX_REF_TOLERANCE = 0b1101;
+const static uint8_t ADDRESS_X_LATCHED = 0b1110;
+const static uint8_t ADDRESS_USTEP_COUNT_429 = 0b1111;
+
+
 int msgCounter = 0;
 String RxBuffer;
 //String RxBuffer2;
@@ -13,40 +31,40 @@ String RxBuffer;
 //========================================================
 void ParseParams(String params)
 {
-	int index1 = 0;
-	int index2 = 0;
-	int index3 = 0;
-	int index4 = 0;
-	param1 = Null;
-	param2 = Null;
-	param3 = Null;
-	param4 = Null;
-	String prm = "";
-	if (params.length() == 1) return;
+    int index1 = 0;
+    int index2 = 0;
+    int index3 = 0;
+    int index4 = 0;
+    param1 = Null;
+    param2 = Null;
+    param3 = Null;
+    param4 = Null;
+    String prm = "";
+    if (params.length() == 1) return;
 
-	index1 = params.indexOf(",");
-	if (index1 == -1) prm = params;
-	else  prm = params.substring(0, index1);
-	param1 = prm.toInt();
+    index1 = params.indexOf(",");
+    if (index1 == -1) prm = params;
+    else  prm = params.substring(0, index1);
+    param1 = prm.toInt();
 
-	if (index1 != -1)
-	{
-		index2 = params.indexOf(",", index1 + 1);
-		prm = params.substring(index1 + 1, index2);
-		param2 = prm.toInt();
-	}
-	if (index2 != -1)
-	{
-		index3 = params.indexOf(",", index2 + 1);
-		prm = params.substring(index2 + 1, index3);
-		param3 = prm.toInt();
-	}
-	if (index3 != -1)
-	{
-		index4 = params.indexOf(",", index3 + 1);
-		prm = params.substring(index3 + 1, index4);
-		param4 = prm.toInt();
-	}
+    if (index1 != -1)
+    {
+        index2 = params.indexOf(",", index1 + 1);
+        prm = params.substring(index1 + 1, index2);
+        param2 = prm.toInt();
+    }
+    if (index2 != -1)
+    {
+        index3 = params.indexOf(",", index2 + 1);
+        prm = params.substring(index2 + 1, index3);
+        param3 = prm.toInt();
+    }
+    if (index3 != -1)
+    {
+        index4 = params.indexOf(",", index3 + 1);
+        prm = params.substring(index3 + 1, index4);
+        param4 = prm.toInt();
+    }
 }
 
 //========================================================
@@ -55,83 +73,101 @@ void ParseParams(String params)
 void GetSerialMsg()
 {
 
-	String cmd;
-	String rxString = Serial.readString();
-	RxBuffer = RxBuffer + rxString;
+    String cmd;
+    String rxString = Serial.readString();
+    RxBuffer = RxBuffer + rxString;
 
-	int index = RxBuffer.indexOf("\n");
-	if (index != -1) {
-		String commandLine = RxBuffer.substring(0, index);
-		RxBuffer = "";
-		Test2_Toggle();
-		if (commandLine.substring(0, 1) == "?")
-		{
-			HandleCommand("?", param1, param2, param3);
-			return;
-		}
-		cmd = commandLine.substring(0, 2);
-		String params = commandLine.substring(2);
+    int index = RxBuffer.indexOf("\n");
+    if (index != -1) {
+        String commandLine = RxBuffer.substring(0, index);
+        RxBuffer = "";
+        Test2_Toggle();
+        if (commandLine.substring(0, 1) == "?")
+        {
+            HandleCommand("?", param1, param2, param3);
+            return;
+        }
+        cmd = commandLine.substring(0, 2);
+        String params = commandLine.substring(2);
 
-		ParseParams(params);
-		HandleCommand(cmd, param1, param2, param3);
-		return;
-	}
-	return;
-	if (index == -1) return;
+        ParseParams(params);
+        HandleCommand(cmd, param1, param2, param3);
+        return;
+    }
+    return;
+    if (index == -1) return;
 }
 //========================================================
 //=====    Report                 ========================
 //========================================================
 void SendRportMessage()
 {
-	Serial.print("=======================================================\r\n");
-	Serial.print("Position\tx= " + String(positionX) + "\t\tY= " + String(positionY) + "\t\tZ= " + String(positionY) + "\r\n");
-	Serial.print("Target\tx= " + String(targetX) + "\t\tY= " + String(targetX) + "\t\tZ= " + String(targetX) + "\r\n");
-	Serial.print("AccMinVelocity\t= " + String(AccMinVelocity) + "\r\n");
-	//	Serial.print("StartVelocity\t= " + String(StartVelocity) + "\r\n");
-	Serial.print("CurrentVelocity\t= " + String(CurrentVelocity) + "\r\n");
-	Serial.print("Velocity\t= " + String(Velocity) + "\r\n");
-	Serial.print("DecPoint\t= " + String(DecPoint) + "\r\n");
-	Serial.print("Timer_Interval\t= " + String(Interval) + "\r\n");
-	Serial.println("MaxVelocity\t= " + String(MaxVelocity));
-	Serial.println("ApproachVelocity= " + String(ApproachVelocity));
-	Serial.println("CreepInterval= " + String(CreepInterval));
+    Serial.print("=======================================================\r\n");
+    Serial.print("Position\tx= " + String(positionX) + "\t\tY= " + String(positionY) + "\t\tZ= " + String(positionY) + "\r\n");
+    Serial.print("Target\tx= " + String(targetX) + "\t\tY= " + String(targetX) + "\t\tZ= " + String(targetX) + "\r\n");
+    Serial.print("AccMinVelocity\t= " + String(AccMinVelocity) + "\r\n");
+    //	Serial.print("StartVelocity\t= " + String(StartVelocity) + "\r\n");
+    Serial.print("CurrentVelocity\t= " + String(CurrentVelocity) + "\r\n");
+    Serial.print("Velocity\t= " + String(Velocity) + "\r\n");
+    Serial.print("DecPoint\t= " + String(DecPoint) + "\r\n");
+    Serial.print("Timer_Interval\t= " + String(Interval) + "\r\n");
+    Serial.println("MaxVelocity\t= " + String(MaxVelocity));
+    Serial.println("ApproachVelocity= " + String(ApproachVelocity));
+    Serial.println("CreepInterval= " + String(CreepInterval));
 
-	Serial.print("EnableSafety= " + String(EnableSafety) + "\r\n");
-	Serial.print("xBoundary0= " + String(xBoundary0) + " : " + "xBoundary1= " + String(xBoundary1) + "\r\n");
+    Serial.print("EnableSafety= " + String(EnableSafety) + "\r\n");
+    Serial.print("xBoundary0= " + String(xBoundary0) + " : " + "xBoundary1= " + String(xBoundary1) + "\r\n");
 }
 //========================================================
 //=====    Send Status Message    ========================
 //========================================================
 void SendStatusMessage()
 {
-	if (isTerminal) return;
+    if (isTerminal) return;
 
-	Serial.println("<" + String(msgCounter++) + "> "+
-        " ST:" + String(Target) +
+    Serial.println("<" + String(msgCounter++) + "> " +
+        " PR:" + String(A001) +
         " PS:" + String(Position) +
         " TR:" + String(Target_State) +
         " CN:" + String(IsConnected) +
-		">");
-}
+        ">");
 
+    Serial.print("X_TARGET:" + String(tmc429_ReadRegister(ADDRESS_X_TARGET)) + "\t");
+    Serial.print("X_ACTUAL:" + String(tmc429_ReadRegister(ADDRESS_X_ACTUAL)) + "\r\n");
+    Serial.print("V_MIN:" + String(tmc429_ReadRegister(ADDRESS_V_MIN)) + "\t\t");
+    Serial.print("V_MAX:" + String(tmc429_ReadRegister(ADDRESS_V_MAX)) + "\r\n");
+    Serial.print("V_TARGET:" + String(tmc429_ReadRegister(ADDRESS_V_TARGET)) + "\t\t");
+    Serial.print("V_ACTUAL:" + String(tmc429_ReadRegister(ADDRESS_V_ACTUAL)) + "\r\n");
+    Serial.print("A_MAX:" + String(tmc429_ReadRegister(ADDRESS_A_MAX)) + "\t\t");
+    Serial.print("A_ACTUAL:" + String(tmc429_ReadRegister(ADDRESS_A_ACTUAL)) + "\r\n");
+//    Serial.print("A_THRESHOLD:" + String(tmc429_ReadRegister(ADDRESS_A_THRESHOLD)) + "\r\n");
+//    Serial.print("PROP_FACTOR:" + String(tmc429_ReadRegister(ADDRESS_PROP_FACTOR)) + "\r\n");
+    Serial.print("CONF_MODE:" + String(tmc429_ReadRegister(ADDRESS_REF_CONF_MODE), HEX) + "\r\n" );
+//    Serial.print("INTERRUPT:" + String(tmc429_ReadRegister(ADDRESS_INTERRUPT)) + "\r\n" );
+//    Serial.print("CLOCK:" + String(tmc429_ReadRegister(ADDRESS_CLOCK_CONFIGURATION)) + "\r\n" );
+//    Serial.print("TOLERANCE:" + String(tmc429_ReadRegister(ADDRESS_DX_REF_TOLERANCE)) + "\r\n" );
+//    Serial.print("LATCHED:" + String(tmc429_ReadRegister(ADDRESS_X_LATCHED)) + "\r\n" );
+//    Serial.print("COUNT_429:" + String(tmc429_ReadRegister(ADDRESS_USTEP_COUNT_429)) + "\r\n" );
+
+    Serial.println(">");
+}
 //========================================================
 //=====      Help                 ========================
 //========================================================
 void SendHelpMessage()
 {
-	Serial.println("PcbTester Version 1.20 - Gusti Base");
-	Serial.println("========================================================");
-	Serial.println("mr - Master Reset");
-	Serial.println("ex - Exit terminal mode");
-	Serial.println("rp - Get report");
-	Serial.println("rn - Move Relative");
-	Serial.println("ci - Set Homing Creep_Interval, when velocity = 0.");
-	Serial.println("hv - Set Homing Approatch velocity");
-	Serial.println("sv - Set velocity.");
-	Serial.println("st - Print machine state (Parameters).");
-	Serial.println("========================================================");
-	Serial.println("?  - Terminal mode - Help Page");
-	Serial.println("ex - Exit terminal mode ");
+    Serial.println("PcbTester Version 1.20 - Gusti Base");
+    Serial.println("========================================================");
+    Serial.println("mr - Master Reset");
+    Serial.println("ex - Exit terminal mode");
+    Serial.println("rp - Get report");
+    Serial.println("rn - Move Relative");
+    Serial.println("ci - Set Homing Creep_Interval, when velocity = 0.");
+    Serial.println("hv - Set Homing Approatch velocity");
+    Serial.println("sv - Set velocity.");
+    Serial.println("st - Print machine state (Parameters).");
+    Serial.println("========================================================");
+    Serial.println("?  - Terminal mode - Help Page");
+    Serial.println("ex - Exit terminal mode ");
 }
 

@@ -2,8 +2,14 @@
 #include <SPI.h>
 #include <Streaming.h>
 #include <TMC429.h>
+#include "Functions.h"
+#include "Externals.cpp"
 
-const int CLOCK_FREQUENCY_MHZ = 8;
+//void setStepDiv(uint8_t step_div);
+//uint8_t getStepDiv();
+
+
+const int CLOCK_FREQUENCY_MHZ = 16;
 const int CLOCK_PIN = 25;
 const int CHIP_SELECT_PIN = 5;
 const int SCLK_PIN = 18;
@@ -48,19 +54,37 @@ void Tmc429_Init()
     tmc429.setup(CHIP_SELECT_PIN, CLOCK_FREQUENCY_MHZ);
     tmc429.initialize();
     tmc429.setVelocityMode(MOTOR);
+    //tmc429.setRampMode(MOTOR);
     tmc429.setTargetVelocityInHz(MOTOR,100);
-
+    tmc429.setLimitsInHz(MOTOR, Vmin,Vmax,AccMax);
 }
 //=============================================================
-void Tmc429_SetTarget(int value)
+void Tmc429_SetTargetV(int value)
+{
+    tmc429.setTargetVelocityInHz(MOTOR, value);
+}
+
+void Tmc429_StopAll()
+{
+    tmc429.stopAll();
+}
+
+int Tmc429_GetTargetV()
+{
+    return tmc429.getTargetVelocityInHz(MOTOR);
+}
+
+
+void Tmc429_SetTargetP(int value)
 {
     tmc429.setTargetPosition(MOTOR, value);
 }
 
-int Tmc429_GetTarget()
+int Tmc429_GetTargetP()
 {
    return tmc429.getTargetPosition(MOTOR);
 }
+
 void tmc429_SetVelocityMode()
 {
     tmc429.setVelocityMode(MOTOR);
@@ -81,3 +105,24 @@ int tmc429_GetPosition()
     return  tmc429.getActualPosition(MOTOR);
 }
 
+void  tmc429_SetPosition(int32_t position)
+{
+    tmc429.setActualPosition(MOTOR,position);
+}
+
+
+void  tmc429_SetMotionProfile(uint32_t vMin, uint32_t vMax, uint32_t accMax)
+{
+    tmc429.setLimitsInHz(MOTOR, vMin, vMax, accMax);
+}
+
+void  tmc429_WriteRegister(uint8_t address, uint32_t value)
+{
+    tmc429.writeRegister(MOTOR, address,value);
+}
+
+
+int  tmc429_ReadRegister(uint8_t address)
+{
+    return tmc429.readRegister(MOTOR, address);
+}

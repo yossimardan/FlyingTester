@@ -1,6 +1,8 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 #include <Arduino.h>
+#include <Arduino.h>
+
 extern long param1,param2,param3;
 
 //========================================================
@@ -8,12 +10,19 @@ extern long param1,param2,param3;
 //========================================================
 
 void Tmc429_Init();
-void Tmc429_SetTarget(int value);
-int Tmc429_GetTarget();
+void Tmc429_SetTargetP(int value);
+int Tmc429_GetTargetP();
+void Tmc429_SetTargetV(int value);
+int Tmc429_GetTargetV();
 void tmc429_SetVelocityMode();
-bool  tmc429_IsConnected();
-int tmc429_GetVersion();
-int tmc429_GetPosition();
+bool    tmc429_IsConnected();
+int     tmc429_GetVersion();
+int     tmc429_GetPosition();
+void    tmc429_SetMotionProfile(uint32_t vMin, uint32_t vMax, uint32_t accMax);
+void    tmc429_SetPosition(int32_t position);
+void    tmc429_WriteRegister(uint8_t address, uint32_t value);
+int     tmc429_ReadRegister(uint8_t address);
+void    Tmc429_StopAll();
 //========================================================
 //=====     General         ==============================
 //========================================================

@@ -7,12 +7,15 @@ extern int TEST2;
 //========================================================
 //=====   TM429             ==============================
 //========================================================
+extern int  A001;
+//extern uint8_t A002;
 extern int  Target_State;
 extern int  Target;
 extern int  Position;
 extern bool IsConnected;
-//============================================================
+extern int Vmin, Vmax, AccMax;
 
+//============================================================
 
 extern float voltageF;
 extern float VoltageFactor;
