@@ -6,7 +6,6 @@ void(*resetFunc) (void) = 0;
 
 void HandleCommand(String cmd, long prm1, int prm2, int prm3)
 {
-
 	//========================================================
 	if (cmd == "?")
 	{
