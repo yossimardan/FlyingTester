@@ -27,9 +27,8 @@ void loop()
 {
 	delay(10);
 	counter++;
-	Test1_Toggle();
 	
-	if (counter > 10)
+	if (counter > 2)
 	{
 //		counter = 0;
 		GetSerialMsg();
@@ -44,7 +43,8 @@ void loop()
 
         Target_State = Tmc429_GetTargetP();
         IsConnected = tmc429_IsConnected();
-        Target_State = tmc429_GetVersion();
+        Config = tmc429_GetConfig();
+        //Target_State = tmc429_GetVersion();
         Position = tmc429_GetPosition();
 
         //tmc429_SetVelocityMode();

@@ -3,6 +3,8 @@
 //========================================================
 extern int TEST1;
 extern int TEST2;
+extern int RXD1_PIN;
+extern int TXD1_PIN;
 
 //========================================================
 //=====   TM429             ==============================
@@ -12,6 +14,8 @@ extern int  A001;
 extern int  Target_State;
 extern int  Target;
 extern int  Position;
+extern int  Config;
+
 extern bool IsConnected;
 extern int Vmin, Vmax, AccMax;
 
@@ -23,7 +27,7 @@ extern int vIndex;
 extern int startIndex;
 extern bool StopPending;
 
-extern bool StopForce ;
+extern bool StopForce;
 
 extern int   AccStep;
 

@@ -16,6 +16,12 @@ void HandleCommand(String cmd, long prm1, int prm2, int prm3)
 		return;
 	}
 
+    if (cmd == "q")
+    {
+        Test1_Toggle();
+        isTerminal = false;
+    }
+
 	//========================================================
 	if (cmd == "rp")
 	{
@@ -42,14 +48,19 @@ void HandleCommand(String cmd, long prm1, int prm2, int prm3)
 
     if (cmd == "sp")
     {
-        tmc429_SetVelocityMode();
-        Tmc429_SetTargetV(0);
+//        tmc429_SetVelocityMode();
+//        Tmc429_SetTargetV(0);
         tmc429_SetPosition(param1);
     }
-
-    if (cmd == "mt")
+    if (cmd == "xx")
     {
-        Tmc429_SetTargetP(param1);
+        tmc429_SetPosition(param1*1000);
+    }
+
+    if (cmd == "ma")
+    {
+        tmc429_SetPositionMode();
+        Tmc429_SetTargetP(param1*1000);
     }
     if (cmd == "sv")
     {
@@ -59,6 +70,24 @@ void HandleCommand(String cmd, long prm1, int prm2, int prm3)
     {
         Tmc429_StopAll();
     }
+
+    if (cmd == "vm")
+    {
+        tmc429_SetVelocityMode();
+    }
+
+    if (cmd == "pm")
+    {
+        tmc429_SetPositionMode();
+    }
+    if (cmd == "in")
+    {
+        Tmc429_Init();
+    }
+
+
+
+
     //========================================================
 	Serial.print("\r\n>");
 }

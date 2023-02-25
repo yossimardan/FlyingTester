@@ -18,6 +18,8 @@ const int MISO_PIN = 19;
 const int SPI_BUS = VSPI;
 const int MOTOR = 0;
 
+const static uint8_t ADDRESS_REF_CONF_MODE = 0b1010;
+
 class MyTMC429 : public TMC429 {
     private:  SPIClass* spi = NULL;
 
@@ -53,7 +55,8 @@ void Tmc429_Init()
 
     tmc429.setup(CHIP_SELECT_PIN, CLOCK_FREQUENCY_MHZ);
     tmc429.initialize();
-    tmc429.setVelocityMode(MOTOR);
+//    tmc429.setVelocityMode(MOTOR);
+    tmc429.setRampMode(MOTOR);
     //tmc429.setRampMode(MOTOR);
     tmc429.setTargetVelocityInHz(MOTOR,100);
     tmc429.setLimitsInHz(MOTOR, Vmin,Vmax,AccMax);
@@ -90,6 +93,11 @@ void tmc429_SetVelocityMode()
     tmc429.setVelocityMode(MOTOR);
 }
 
+void tmc429_SetPositionMode()
+{
+    tmc429.setRampMode(MOTOR);
+}
+
 bool  tmc429_IsConnected()
 {
     return  tmc429.communicating();
@@ -99,6 +107,7 @@ int tmc429_GetVersion()
 {
     return  tmc429.getVersion();
 }
+
 
 int tmc429_GetPosition()
 {
@@ -125,4 +134,9 @@ void  tmc429_WriteRegister(uint8_t address, uint32_t value)
 int  tmc429_ReadRegister(uint8_t address)
 {
     return tmc429.readRegister(MOTOR, address);
+}
+
+int tmc429_GetConfig()
+{
+    return  tmc429_ReadRegister(ADDRESS_REF_CONF_MODE);
 }

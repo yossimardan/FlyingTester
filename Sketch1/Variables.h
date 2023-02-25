@@ -2,9 +2,14 @@
 //========================================================
 //=====   GPIO  MAPPING     ==============================
 //========================================================
+
 int TEST1 = 16;
 int TEST2 = 17;
 
+int TXD1_PIN = 15;
+int RXD1_PIN = 4;
+
+//HardwareSerial Com;
 //========================================================
 //=====   TM429             ==============================
 //========================================================
@@ -13,45 +18,13 @@ int     A001;
 int     Target_State;
 int     Target;
 int     Position;
+int     Config;
 bool    IsConnected;
-int     Vmin = 100; 
+int     Vmin = 100;
 int     Vmax = 50000;
-int     AccMax = 10000;
+int     AccMax = 100000;
 //============================================================
 
-//String RxBuffer2;
-
-
-
-
-
-// 
-// 
-// 
-//int Pulse_Pin_X       = 10;
-//int Dir_Pin_X         = 11;
-//int Pulse_Pin_Y       = 8;
-//int Dir_Pin_Y         = 9;
-//int Pulse_Pin_Z       = 6;
-//int Dir_Pin_Z         = 7;
-//int ENA_X_PIN         = 12;
-////int ENA_Y_PIN       = 9;
-////int SELECT_2        = 21;
-////int SELECT_1        = 20;
-//int SELECT_0          = 5;// 
-//int TEST1_PIN         = 4;// 
-//int TEST2_PIN         = 21;//
-//int DacOut            = A0;//
-//int SENSOR_X_PIN        = 0;
-//int SENSOR_Y_PIN        = 1;
-//int  SENSOR_Z_PIN		= 2;
-//int SENSOR_EMS_PIN      = 3;
-//int OVER                = 18;
-//int In0                 = 16;
-//int In1                 = 17;
-//int In2                 = 19;
-//int In3                 = 20;
-//============================================================
 
 int startIndex;
 int vIndex;
@@ -110,9 +83,9 @@ int  maxVz;
 int  AccStep;
 
 
-int Numerator_A =352;
-int Numerator_B =589;
-int Numerator_C =1930;
+int Numerator_A = 352;
+int Numerator_B = 589;
+int Numerator_C = 1930;
 
 //int Denominator_A =1
 //int Denominator_B =1
@@ -129,9 +102,9 @@ static const int SENSOR_Z_DOWN_PIN = A4;
 
 float voltageF;
 long  voltage;
-float VoltageFactor=975;
- 
- 
+float VoltageFactor = 975;
+
+
 
 int stepsToMilimetersDivider = 200;
 
@@ -139,24 +112,24 @@ int stepsToMilimetersDivider = 200;
 int velocitySlow = 4000;
 int accelerationSlow = 30000;
 int velocityFast = 8000;
-int accelerationFast =40000;
+int accelerationFast = 40000;
 int velocityVerySlow = 1000;
 int accelerationVerySlow = 2000;
 
 
-int MaxVx  = 120000;
-int MaxVy  = 20000;
-int MaxVz  = 20000;
-int Null   = -1;
+int MaxVx = 120000;
+int MaxVy = 20000;
+int MaxVz = 20000;
+int Null = -1;
 
-int Vx  = 10000;
-int AccStepX  = 1;
-int Vy  = 10000;
-int Ay  = 1000000;
-int Vz  = 10000;
-int Az  = 1000000;
+int Vx = 10000;
+int AccStepX = 1;
+int Vy = 10000;
+int Ay = 1000000;
+int Vz = 10000;
+int Az = 1000000;
 
-int Velocity  = 100;
+int Velocity = 100;
 
 
 /*
@@ -177,7 +150,7 @@ int yBoundary1 = 50000;//180 * stepsToMilimetersDivider;
 int zBoundary0 = -1000;//0 * stepsToMilimetersDivider;
 int zBoundary1 = 50000;//30 *stepsToMilimetersDivider;
 
-int CruiseAlt  = 2000;
+int CruiseAlt = 2000;
 
 //=============================================
 int zLock2DMovement = 0 * stepsToMilimetersDivider;
@@ -188,7 +161,7 @@ int hopHeightCircle = 20 * stepsToMilimetersDivider;
 
 //String  RxBuffer = "";
 String  cmd = "";
-long    param1,param2,param3,param4;
+long    param1, param2, param3, param4;
 int     currentStatus = 0;
 int     hopState = 0;
 bool    isHopping = false;
@@ -211,9 +184,9 @@ bool  isHomeDone = false;
 int   ApproachVelocity;
 int   CreepVelocity = 2;
 int   CreepInterval;
-int   HomingOffsetX ;
-int   HomingOffsetY ;
-int   HomingOffsetZ ;
+int   HomingOffsetX;
+int   HomingOffsetY;
+int   HomingOffsetZ;
 int   homingX = 0;
 int   homingY = 0;
 int   homingZ = 0;
